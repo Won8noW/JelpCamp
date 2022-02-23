@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const mongoose = require('mongoose');
 const path = require('path');
 const Campground = require('./models/campground');
@@ -25,6 +26,11 @@ app.get('/campgrounds', async (req,res) => {
     const campgrounds = await Campground.find({});
     res.render('campgrounds/index', {campgrounds})
 })
+
+app.get('/campgrounds/:id', async (req,res) => {
+    const campground = await Campground.findById(req.params.id)
+    res.render('campgrounds/show', {campground});
+});
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')
