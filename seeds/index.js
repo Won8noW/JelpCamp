@@ -25,4 +25,6 @@ mongoose.connect('mongodb://localhost:27017/yelpCampDb', { useNewUrlParser: true
             await camp.save();
         }
     }
-seedDB(); 
+seedDB().then(() => {
+    mongoose.connection.close();
+}); 
